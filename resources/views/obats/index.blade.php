@@ -29,7 +29,7 @@
         </tr>
         @foreach ($obats as $obat)
         <tr>
-            <td>{{ ++$i }}</td>
+            
             <td>{{ $obat->nama_obat }}</td>
             <td>{{ $obat->kemasan }}</td>
             <td>Rp {{ number_format($obat->harga, 0, ',', '.') }}</td>
