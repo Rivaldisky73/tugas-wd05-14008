@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('periksa_');
+        Schema::dropIfExists('periksa'); // Harus sama persis dengan nama tabel yang dibuat
     }
 };

@@ -20,8 +20,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->enum('role', ['pasien', 'dokter'])->default('pasien');
-$table->foreignId('dokter_id')->nullable()->constrained('dokters')->onDelete('set null');
-$table->foreignId('pasien_id')->nullable()->constrained('pasiens')->onDelete('set null');
+            $table->unsignedBigInteger('dokter_id')->nullable();
+            $table->unsignedBigInteger('pasien_id')->nullable();
+
 
         });
 

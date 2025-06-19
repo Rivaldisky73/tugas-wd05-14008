@@ -14,8 +14,16 @@ class Pasien extends Model
         'jenis_kelamin',
         'no_hp',
         'alamat',
-        'tanggal_lahir'
+        'tanggal_lahir',
+    'pasien_id', 'dokter_id', 'tanggal_periksa', 'jam_periksa',
+    'keluhan', 'diagnosa', 'biaya_periksa'
     ];
+
+    public function detailPeriksas()
+    {
+        return $this->hasMany(DetailPeriksa::class);
+    }
+
 
     /**
      * Get all examinations for this patient

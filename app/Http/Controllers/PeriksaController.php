@@ -7,6 +7,7 @@ use App\Models\Periksa;
 use App\Models\DetailPeriksa;
 use App\Models\Dokter;
 use App\Models\Pasien;
+use App\Models\Obat;
 
 class PeriksaController extends Controller
 {
@@ -61,4 +62,12 @@ class PeriksaController extends Controller
         return view('periksa.pasien', compact('pasiens'));
     }
 
+        public function create()
+    {
+        $pasiens = Pasien::all();
+        $dokters = Dokter::all();
+        $obats = Obat::all();
+
+        return view('periksa.create', compact('pasiens', 'dokters', 'obats'));
+    }
 }

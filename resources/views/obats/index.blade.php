@@ -1,51 +1,37 @@
-@extends('layouts.app')
+@if (session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Manajemen Obat</h2>
-            </div>
-            <div class="pull-right mb-3">
-                <a class="btn btn-success" href="{{ route('obats.create') }}">Tambah Obat Baru</a>
-            </div>
-        </div>
-    </div>
+<h3>Manajemen Obat</h3>
+<a href="{{ route('obats.create') }}" class="btn btn-primary mb-2">+ Tambah Obat</a>
 
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-
-    <table class="table table-bordered">
+<table class="table table-bordered">
+    <thead>
         <tr>
             <th>No</th>
             <th>Nama Obat</th>
             <th>Kemasan</th>
             <th>Harga</th>
-            <th width="280px">Action</th>
+            <th>Action</th>
         </tr>
-        @foreach ($obats as $obat)
-        <tr>
-            
-            <td>{{ $obat->nama_obat }}</td>
-            <td>{{ $obat->kemasan }}</td>
-            <td>Rp {{ number_format($obat->harga, 0, ',', '.') }}</td>
-            <td>
-                <form action="{{ route('obats.destroy',$obat->id) }}" method="POST">
-                    <a class="btn btn-info btn-sm" href="{{ route('obats.show',$obat->id) }}">Show</a>
-                    <a class="btn btn-primary btn-sm" href="{{ route('obats.edit',$obat->id) }}">Edit</a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </table>
-
-    {!! $obats->links() !!}
-</div>
-@endsection
+    </thead>
+    <tbody>
+        @forelse ($obats as $index => $obat)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $obat->nama }}</td>
+                <td>{{ $obat->kemasan }}</td>
+                <td>Rp {{ number_format($obat->harga, 0, ',', '.') }}</td>
+                <td>
+                    <a href="{{ route('obats.edit', $obat->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('obats.destroy', $obat->id) }}" method="POST" style="display:inline;">
+                        @csrf @method('DELETE')
+                        <button onclick="return confirm('Yakin hapus?')" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+        @empty
+            <tr><td colspan="5">Tidak ada data obat.</td></tr>
+        @endforelse
+    </tbody>
+</table>

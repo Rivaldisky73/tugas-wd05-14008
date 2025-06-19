@@ -18,10 +18,12 @@ class Periksa extends Model
     public function dokter()
     {
         return $this->belongsTo(Dokter::class);
+        return $this->belongsTo(Dokter::class, 'dokter_id');
     }
-
+    
     public function pasien()
     {
+        return $this->belongsTo(Pasien::class, 'pasien_id');
         return $this->belongsTo(Pasien::class);
     }
 

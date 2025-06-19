@@ -74,6 +74,12 @@
               <p>Manajemen Obat</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('periksa.create') }}" class="nav-link {{ request()->is('periksa*') ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Periksa Pasien Diagnosa</p>
+            </a>
+          </li>
         </ul>
       </li>
 
